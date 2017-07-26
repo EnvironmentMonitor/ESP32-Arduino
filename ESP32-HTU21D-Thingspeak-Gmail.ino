@@ -38,7 +38,7 @@ void wsysreset()
 }
 
 void setup() {
-  Wire.begin(4,5);
+  Wire.begin(); // pins 21 + 22
   myHTU21D.begin();
   // inital connect
   WiFi.mode(WIFI_STA);
@@ -79,7 +79,8 @@ if (millis()>=ulNextMeas_ms)
   // Read the input on each pin, convert the reading, and set each field to be sent to ThingSpeak.
   // On ESP8266: ESP.getVcc measures the supply input 0-4000 millivolts
   // On ESP8266: analogRead 0 - 1023 maps to 0 - 1 volts
-   float pfVcC = analogRead(33);
+  // on ESP32 use analogRead to read Vcc from a resistor
+   float pfVcC = analogRead(33);  // connect pin 33 to vcc via 1k resistor
    float S1pfHum = myHTU21D.readHumidity();
    float S1pfTemp = myHTU21D.readTemperature();
    float a = 17.67;
