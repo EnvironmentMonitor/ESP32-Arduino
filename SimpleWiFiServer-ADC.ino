@@ -29,17 +29,18 @@ ported for sparkfun esp32
 
 const char* ssid     = "SSID";
 const char* password = "PASSKEY";
+
 int *aDcData0;
 int *aDcData1;
 int *aDcData2;
 int *aDcData3;
-
-long int total0,total1,total2,total3;
+unsigned long total0,total1,total2,total3;
 int SampleCount = 100;
 int y,y2,record;
 
 unsigned long ulMeasCount=0;
 unsigned long ulNextMeas_ms=0;
+
 //int  ReFresh = 10;
 int siZe = 1000;
 
@@ -75,7 +76,7 @@ void GetReading(){
    total2 += analogRead(34); 
    total3 += analogRead(35); 
    }
-   aDcData0[ulMeasCount] = total0 / SampleCount;  // Read ADC7
+   aDcData0[ulMeasCount] = total0 / SampleCount;  // Read ADC
    aDcData1[ulMeasCount] = total1 / SampleCount;
    aDcData2[ulMeasCount] = total2 / SampleCount;
    aDcData3[ulMeasCount] = total3 / SampleCount;
@@ -140,7 +141,7 @@ clearArray();
 
   // Set alarm to call onTimer function every second (value in microseconds).
   // Repeat the alarm (third parameter)
-  timerAlarmWrite(timer, 2000, true);  // 20 milliseconds
+  timerAlarmWrite(timer, 2000, true);  // 2 milliseconds
 
   // Start an alarm
   timerAlarmEnable(timer);
